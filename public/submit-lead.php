@@ -133,8 +133,8 @@ if ($device === '') {
     $device = preg_match('/mobile|android|iphone|ipad|ipod/i', $ua) ? 'mobile' : 'desktop';
 }
 
-$utmSource   = getVal($data, 'utm_source', 'Microsite');
-$utmMedium   = getVal($data, 'utm_medium', 'organic');
+$utmSource   = getVal($data, 'utm_source', 'google');
+$utmMedium   = getVal($data, 'utm_medium', '');
 $utmCampaign = getVal($data, 'utm_campaign');
 $utmTerm     = getVal($data, 'utm_term');
 $utmContent  = getVal($data, 'utm_content');
