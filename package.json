@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "deploy": "bash scripts/deploy.sh"
   },
   "dependencies": {
     "@next/third-parties": "^16.2.3",
