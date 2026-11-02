@@ -1,0 +1,51 @@
+# ═══════════════════════════════════════════════════════════════
+# HOSTINGER APACHE / LITESPEED CONFIGURATION
+# ═══════════════════════════════════════════════════════════════
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. API Route Rewrite: Forward /api/submit-lead to submit-lead.php
+  RewriteRule ^api/submit-lead/?$ submit-lead.php [L,QSA]
+  RewriteRule ^submit-lead/?$ submit-lead.php [L,QSA]
+
+  # 2. Directory with matching .html file
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_FILENAME}/index.html !-f
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^(.*?)/?$ $1.html [L]
+
+  # 3. Clean URLs for Next.js exported pages (.html extension hiding)
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}\.html -f
+  RewriteRule ^(.*)$ $1.html [L]
+
+  # 4. Trailing slash / folder index handling
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.*)$ $1/index.html [L]
+</IfModule>
+
+# Security: Deny direct web access to sensitive files and logs
+<FilesMatch "^(leads\.log|\.git|\.env)">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Enable Browser Caching for static assets
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# Enable GZIP Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>

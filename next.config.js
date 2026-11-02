@@ -2,7 +2,6 @@
 const nextConfig = {
   // Hostinger: Static HTML export
   output: 'export',
-  trailingSlash: true,
 
   // Disable Next.js Image Optimization server requirement
   images: {
