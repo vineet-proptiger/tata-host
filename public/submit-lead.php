@@ -23,7 +23,7 @@ ini_set('display_errors', 0);
 
 /* ─── DEFAULT CONFIGURATION (TATA GHANSOLI) ─── */
 define('DEFAULT_PROJECT_ID',   '3528269');
-define('DEFAULT_PROJECT_NAME', 'Tata Ghansoli');
+define('DEFAULT_PROJECT_NAME', 'Tata Orbis Ghansoli');
 define('DEFAULT_CITY_DISPLAY', 'Mumbai');
 define('DEFAULT_CITY_SLUG',    'mumbai');
 define('DEFAULT_CITY_ID',      '1');
